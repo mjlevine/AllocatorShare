@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllocatorShare2", "AllocatorShare2\AllocatorShare2.csproj", "{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileService", "FileService\FileService.csproj", "{C5AF6431-F958-42D5-9348-A900098EC9F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllocatorShare2.Core", "AllocatorShare2.Core\AllocatorShare2.Core.csproj", "{7745B53E-7172-4BCB-957D-5EA8091090F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

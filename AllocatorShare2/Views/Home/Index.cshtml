@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="">
+    <div class="row">
+        <div class="col-xs-4">
+            <div id="allocatorShareTree" style="margin-bottom: 10px;"></div>
+        </div>
+        <div class="col-xs-8">
+            <p>Please select a Major Department, click Apply. Pick a Category Manager and Press Continue</p>
+            <div>
+                <label>Select Major Department:</label>
+                <select name="ddlDept" id="ddlDept" style="width:160px;">
+
+                </select>
+                <input type="button" name="ApplyDepartment" id="ApplyDepartment" valign="bottom" value="Apply" class="btn btn-default btn-sm">
+            </div>
+            <div>
+                <label>
+                    Category Manager:
+                </label>
+                <select name="ddlCatMgr" id="ddlCatMgr" style="width:212px;">
+                    <option value="Carmela Pitzer, Natural Foods">Carmela Pitzer, Natural Foods</option>
+                    <option value="Elaine Zentz, Natural Foods">Elaine Zentz, Natural Foods</option>
+                    <option value="Kristin Waldvogel, Natural Foods">Kristin Waldvogel, Natural Foods</option>
+                    <option value="Lynn Espinoza, Natural Foods">Lynn Espinoza, Natural Foods</option>
+                    <option value="Scott Boothe, Natural Foods">Scott Boothe, Natural Foods</option>
+
+                </select>
+                <div>
+                    <input type="button" name="imbtnUpload1" id="imbtnUpload1" value="Continue" class="btn btn-primary" style="width:136px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

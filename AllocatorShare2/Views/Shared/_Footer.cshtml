@@ -1,0 +1,58 @@
+﻿@model MK6.IBC.Website.Models.HomeModel
+
+@if (Model == null || Model.user == null)
+{
+    <footer id="footer" class="footer nopad">
+        <div class="position-wrap">
+            <a class="footer-logo" href="">
+                Market6 | for everyday heroics
+            </a>
+            <ul class="footer-nav">
+                <li>
+                    <a href="">
+                        Support
+                    </a>
+                </li>
+            </ul>
+            <p class="footer-copyright">
+                &copy; Copyright 2014 Market6, Inc.
+            </p>
+        </div>
+    </footer>
+}
+else
+{
+    <footer id="footer" class="footer nopad">
+        <div class="position-wrap">
+            <a class="footer-logo" href="">
+                Market6 | for everyday heroics
+            </a>
+            <ul class="footer-nav">
+                <li>
+                    @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            Sign out
+                        </a>
+                    }*@
+                    
+                    <a class="global-nav-logout" href='#'>Sign out</a>        
+                </li>
+                <li>
+                    <a href="">
+                        Support
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Site Map
+                    </a>
+                </li>
+            </ul>
+            <p class="footer-copyright">
+                &copy; Copyright 2014 Market6, Inc.
+            </p>
+        </div>
+    </footer>
+}

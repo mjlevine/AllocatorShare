@@ -1,0 +1,20 @@
+{
+  "name": "AllocatorShare2",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react-treeview": "~0.3.10",
+    "bootstrap": "~3.3.1",
+    "jquery": "~1.10.0",
+    "toastr": "~2.1.0",
+    "underscore": "~1.7.0",
+    "moment": "~2.8.4"
+  }
+}
