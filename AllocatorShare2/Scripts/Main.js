@@ -70,8 +70,20 @@
                 document.getElementById('allocatorShareTree')
             );
         });
-    }
+    };
 
+    var getManagers= function (id) {
+        var managerSelectList = document.getElementById('CategoryManagerList')
+        managerSelectList.innerHTML = '';
+        $.getJSON("/api/managerlist/" + id, function (data) {
+            var listItems = '';
+            _.each(data, function(item){
+                listItems+= "<option value='" + item.value + "'>" + item.text + "</option>";
+            });
+            managerSelectList.innerHTML = listItems;
+        });
+    };
+    
     $.getJSON("/api/rootlist/1", function (data) {
         var listItems = '';
         _.each(data, function(item){
@@ -80,11 +92,13 @@
         $("#ddlDept").html(listItems);
 
         getContents(data[0].value);
+        getManagers(data[0].value);
     });
 
     $("#ApplyDepartment").on("click", function(){
         var value = $("#ddlDept").val();
         getContents(value);
+        getManagers(value);
     });
 
 

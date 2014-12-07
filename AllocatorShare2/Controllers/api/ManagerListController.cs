@@ -10,19 +10,20 @@ using FileService;
 
 namespace AllocatorShare2.Controllers.api
 {
-    public class RootListController : ApiController
+    public class ManagerListController : ApiController
     {
         [System.Web.Http.HttpGet]
         public async Task<List<SelectListItem>> Get(string id)
         {
             var sf = new ShareFileService();
-            var list = await sf.GetRootList();
+            var list = await sf.GetFolderListContents(id, true);
             var listItems = new List<SelectListItem>();
-            foreach (var item in list.Contents)
+            var managerContents = list.Contents.Where(m => !m.Name.Equals("Allocator_Templates"));
+            foreach (var item in managerContents)
             {
                 listItems.Add(new SelectListItem()
                 {
-                    Text = item.Description,
+                    Text = string.Format("{0}, {1}", item.Description, list.Description),
                     Value = item.Id
                 });
             }

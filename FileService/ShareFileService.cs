@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AllocatorShare2.Core.Models;
 using ShareFile.Api.Client;
+using ShareFile.Api.Client.Enums;
+using ShareFile.Api.Client.Extensions;
 using ShareFile.Api.Client.Security.Authentication.OAuth2;
 using ShareFile.Api.Models;
 using AllocatorShare2.Core.Models;
@@ -26,27 +28,20 @@ namespace FileService
         public async Task<TreeListViewModel> GetRootList()
         {
             var list = new TreeListViewModel();
-       
-            var folders = await GetRoot();
-            var f = folders;
-            list.Name = f.Name;
-            list.Contents = new List<TreeListViewModel>();
-            foreach (var c in f.Children)
-            {
-                var tr = await ProcessShareFileItem(c);
-                list.Contents.Add(tr);
-            }
+
+            var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true);
+            
+            list.Name = folders.Name;
+            list.Contents = folders.Contents.First().Contents;
+            
             return list;
         }
         
         public async Task<TreeListViewModel> GetFolderList()
         {
-            var list = new TreeListViewModel();
-
-            var folders = await GetRoot();
-            list.Name = folders.Name;
-            list.Contents = new List<TreeListViewModel>();
-            foreach (var c in folders.Children)
+            var items = await GetRoot();
+            var list = PopulateTreeListViewModel(items, true, new List<TreeListViewModel>());
+            foreach (var c in items.Children)
             {
                 var tr = await ProcessShareFileItem(c, true);
                 list.Contents.Add(tr);
@@ -54,27 +49,26 @@ namespace FileService
             return list;
         }
 
-        public async Task<TreeListViewModel> GetFolderListContents(string id)
+
+        public async Task<TreeListViewModel> GetFolderListContents(string id, bool expand = true)
         {
             var items = await GetItemList(BuildUriFromId(id));
-            var list = new TreeListViewModel();
-            list.Name = items.Name;
-            list.Contents = new List<TreeListViewModel>();
+            var list = PopulateTreeListViewModel(items, true, new List<TreeListViewModel>());
             foreach (var c in items.Children)
             {
-                var t = await ProcessShareFileItem(c, true);
+                var t = await ProcessShareFileItem(c, expand);
                 list.Contents.Add(t);
             }
             return list;
         }
 
-        private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri)
+        private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri, bool expand = false)
         {
             var items = await GetItemList(uri);
             var list = new List<TreeListViewModel>();
             foreach (var c in items.Children)
             {
-                var t = await ProcessShareFileItem(c);
+                var t = await ProcessShareFileItem(c, expand);
                 list.Add(t);
             }
             return list;
@@ -84,8 +78,38 @@ namespace FileService
         {
             var sfClient = await GetShareFileClient();
 
-            var folder = (Folder)sfClient.Items.Get()
-                .Execute();
+            var itemUri = sfClient.Items.GetAlias(ItemAlias.Home);
+            var folder = (Folder)await sfClient.Items.Get(itemUri).Expand("Children").ExecuteAsync();
+
+            return folder;
+        }
+
+        //private async Task<Folder> Search()
+        //{
+        //    var sfClient = await GetShareFileClient();
+
+        //    var itemUri = sfClient.Items.GetAlias(ItemAlias.Root);
+        //    var folder = (SearchResult) await sfClient.Items.Search("market6").ExecuteAsync();
+
+        //    return folder;
+        //}
+
+        private async Task<Folder> GetUnexpandedItemList(Uri uri)
+        {
+            var sfClient = await GetShareFileClient();
+
+            var folder = (Folder)sfClient.Items.Get(uri)
+               .Execute();
+
+            return folder;
+        }
+
+        private async Task<Folder> GetTopOneUnexpandedItemList(Uri uri)
+        {
+            var sfClient = await GetShareFileClient();
+
+            var folder = (Folder)sfClient.Items.Get(uri)
+               .Execute();
 
             return folder;
         }
@@ -111,15 +135,22 @@ namespace FileService
             {
                 contents = await GetFolderListContents(folder.url);
             }
-            var tr = new TreeListViewModel()
+            var tr = PopulateTreeListViewModel(c, isFolder, contents);
+            return tr;
+        }
+
+        private static TreeListViewModel PopulateTreeListViewModel(Item c, bool isFolder, List<TreeListViewModel> contents)
+        {
+            return new TreeListViewModel()
             {
                 Name = c.Name,
+                Description = !string.IsNullOrEmpty(c.Description) ? c.Description : c.Name.Replace("_", " "),
                 Type = isFolder ? "folder" : "file",
                 Id = c.Id,
                 Contents = isFolder ? contents : null
             };
-            return tr;
         }
+
         private async Task<ShareFileClient> GetShareFileClient()
         {
             var sfClient = new ShareFileClient("https://secure.sf-api.com/sf/v3/");

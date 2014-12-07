@@ -21,8 +21,10 @@ namespace AllocatorShare2.Controllers.api
         public async Task<TreeListViewModel> Test(string id)
         {
             var sf = new ShareFileService();
-            var list = await sf.GetFolderListContents(id);
-            return list;
+            var list = await sf.GetFolderListContents(id, false);
+            var template = list.Contents.FirstOrDefault(m => m.Name == "Allocator_Templates");
+            var templatesList = await sf.GetFolderListContents(template.Id, true);
+            return templatesList;
         }
     }
 }
