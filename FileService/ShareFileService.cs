@@ -16,14 +16,12 @@ namespace FileService
 {
     public class ShareFileService
     {
-        private string applicationControlPlane = "sharefile.com";
-        private string applicationApiUrl = "sf-api.com";
-        private string subdomain = "market6";
-        private string username = "rick.svitak@market6.com";
-        private string password = "dime1400";
-        //private string subdomain = "spaceshipb";
-        //private string username = "adam@spaceshipb.com";
-        //private string password = "D&y4A5J5Em4&";
+        private string applicationControlPlane = ConfigurationHelper.ApplicationControlPlane;
+        private string applicationApiUrl = ConfigurationHelper.ApiUrl;
+        private string subdomain = ConfigurationHelper.Subdomain;
+        private string username = ConfigurationHelper.Username;
+        private string password = ConfigurationHelper.Password;
+
 
         public async Task<TreeListViewModel> GetRootList()
         {
@@ -60,6 +58,20 @@ namespace FileService
                 list.Contents.Add(t);
             }
             return list;
+        }
+
+        public List<TreeListViewModel> GetManagerListItems(List<TreeListViewModel> contents)
+        {
+            var managerContents = contents.Where(m => !m.Name.Equals("Allocator_Templates")).OrderBy(m => m.Name).ToList();
+
+            return managerContents; 
+        }
+
+        public TreeListViewModel GetAllocatorTemplate(List<TreeListViewModel> contents)
+        {
+            var allocatorContent = contents.FirstOrDefault(m => m.Name.Equals("Allocator_Templates"));
+
+            return allocatorContent;
         }
 
         private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri, bool expand = false)

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Allocator";
 }
 <div class="">
     <div class="row">
@@ -7,24 +7,45 @@
             <div id="allocatorShareTree" style="margin-bottom: 10px;"></div>
         </div>
         <div class="col-xs-8">
-            <p>Please select a Major Department, click Apply. Pick a Category Manager and Press Continue</p>
-            <div>
-                <label>Select Major Department:</label>
-                <select name="ddlDept" id="ddlDept" style="width:160px;">
+            <div class="well">
+                <p class="bg-warning lead">Please select a Major Department, click Apply.</p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="ddlDept" class="col-sm-3 control-label">Major Department</label>
+                        <div class="col-sm-6">
+                            <select name="ddlDept" id="ddlDept" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3" id="DepartmentLoading"></div>
+                        <div class=" col-sm-9">
+                            <input type="button" name="ApplyDepartment" id="ApplyDepartment" valign="bottom" value="Apply" class="btn btn-default btn-sm">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="well">
+                <p class="bg-warning lead">Pick a Category Manager and Press Continue.</p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Category Manager:
+                        </label>
+                        <div class="col-sm-6">
+                            <select name="CategoryManagerList" id="CategoryManagerList" class="form-control"></select>
+                        </div>
 
-                </select>
-                <input type="button" name="ApplyDepartment" id="ApplyDepartment" valign="bottom" value="Apply" class="btn btn-default btn-sm">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3" id="ManagerLoading"></div>
+                        <div class=" col-sm-9">
+                            <input type="button" name="imbtnUpload1" id="imbtnUpload1" value="Continue" class="btn btn-primary" style="width:136px;">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div>
-                <label>
-                    Category Manager:
-                </label>
-                <select name="CategoryManagerList" id="CategoryManagerList" style="width:212px;">
-                </select>
-                <div>
-                    <input type="button" name="imbtnUpload1" id="imbtnUpload1" value="Continue" class="btn btn-primary" style="width:136px;">
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

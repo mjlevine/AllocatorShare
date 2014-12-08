@@ -6,6 +6,7 @@
 
     /*jshint ignore:start */
     var TreeNode = React.createClass({
+        xhr: false,
         getInitialState: function () {
             return {
                 visible: true
@@ -47,7 +48,7 @@
             return (
                 <div>
                     <h5 onClick={this.toggle} className={className}>
-          {this.props.node.name}
+          {this.props.node.description}
                     </h5>
                     <ul style={style}>
           {childNodes}
@@ -58,47 +59,59 @@
 
     });
 
+    var setLoading = function(el) {
+        el.innerHTML = '';
+        var loading = document.createElement("div");
+        loading.className = "loading";
+        el.appendChild(loading);
+    };
 
-
-
+    var contentsXhr, managersXhr;
     var getContents = function (id) {
-        document.getElementById('allocatorShareTree').innerHTML = '';
-        $.getJSON("/api/share/" + id, function (data) {
-            dataSource = data;
+        if(contentsXhr) {
+            contentsXhr.abort();
+        }
+        setLoading(document.getElementById('ManagerLoading'));
+        setLoading(document.getElementById('allocatorShareTree'))
+        var managerSelectList = document.getElementById('CategoryManagerList')
+        managerSelectList.innerHTML = '';
+        
+        contentsXhr = $.getJSON("/api/share/" + id, function (data) {
+            dataSource = data.allocatorList;
             React.render(
                 <TreeNode node={dataSource} />,
                 document.getElementById('allocatorShareTree')
             );
-        });
-    };
 
-    var getManagers= function (id) {
-        var managerSelectList = document.getElementById('CategoryManagerList')
-        managerSelectList.innerHTML = '';
-        $.getJSON("/api/managerlist/" + id, function (data) {
+
             var listItems = '';
-            _.each(data, function(item){
+            _.each(data.managerList, function(item){
                 listItems+= "<option value='" + item.value + "'>" + item.text + "</option>";
             });
             managerSelectList.innerHTML = listItems;
+            document.getElementById('ManagerLoading').innerHTML = '';
+
         });
     };
-    
+
+
+
+    setLoading(document.getElementById('DepartmentLoading'));
     $.getJSON("/api/rootlist/1", function (data) {
         var listItems = '';
         _.each(data, function(item){
             listItems+= "<option value='" + item.value + "'>" + item.text + "</option>";
         });
         $("#ddlDept").html(listItems);
-
+        document.getElementById('DepartmentLoading').innerHTML = '';
         getContents(data[0].value);
-        getManagers(data[0].value);
+        //getManagers(data[0].value);
     });
 
     $("#ApplyDepartment").on("click", function(){
         var value = $("#ddlDept").val();
         getContents(value);
-        getManagers(value);
+        //getManagers(value);
     });
 
 
