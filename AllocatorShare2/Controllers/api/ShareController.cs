@@ -29,7 +29,7 @@ namespace AllocatorShare2.Controllers.api
 
             //Tree List
             var template = list.Contents.FirstOrDefault(m => m.Name == "Allocator_Templates");
-            var templatesList = await sf.GetFolderListContents(template.Id, true);
+            var templatesList = await sf.GetFolderListContents(template.Id, true, true);
             templatesList.Description = string.Format("EZ Allocator - {0}", list.Description);
             var toReturn = new AllocatorTemplateViewModel()
             {

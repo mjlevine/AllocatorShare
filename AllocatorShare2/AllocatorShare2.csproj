@@ -226,45 +226,7 @@
     <Content Include="Content\bootstrap\mk6-vantage.css.map" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-all.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.src.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-blue.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-green.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-unica.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\gray.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid-light.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\sand-signika.js" />
-    <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
     <Content Include="Scripts\Main.js" />
-    <Content Include="Scripts\Mk6\eventService.js" />
-    <Content Include="Scripts\Mk6\hierarchyFilter.js" />
-    <Content Include="Scripts\Mk6\reportFilterScope.js" />
-    <Content Include="Scripts\Mk6\timeFilter.js" />
-    <Content Include="Scripts\Mk6\userSelector.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -276,8 +238,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -314,6 +274,7 @@
     <Content Include="packages.config" />
     <Content Include="Content\Site.less" />
     <None Include="Project_Readme.html" />
+    <None Include="Properties\PublishProfiles\Home.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AllocatorShare2.Core\AllocatorShare2.Core.csproj">

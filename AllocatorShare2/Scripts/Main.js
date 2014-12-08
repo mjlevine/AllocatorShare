@@ -75,7 +75,7 @@
         setLoading(document.getElementById('allocatorShareTree'))
         var managerSelectList = document.getElementById('CategoryManagerList')
         managerSelectList.innerHTML = '';
-        
+
         contentsXhr = $.getJSON("/api/share/" + id, function (data) {
             dataSource = data.allocatorList;
             React.render(

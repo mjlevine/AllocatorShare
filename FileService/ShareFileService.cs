@@ -23,11 +23,13 @@ namespace FileService
         private string password = ConfigurationHelper.Password;
 
 
+        private ShareFileClient _client;
+
         public async Task<TreeListViewModel> GetRootList()
         {
             var list = new TreeListViewModel();
 
-            var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true);
+            var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true, false);
             
             list.Name = folders.Name;
             list.Contents = folders.Contents.First().Contents;
@@ -48,13 +50,13 @@ namespace FileService
         }
 
 
-        public async Task<TreeListViewModel> GetFolderListContents(string id, bool expand = true)
+        public async Task<TreeListViewModel> GetFolderListContents(string id, bool expand, bool goDeep = false)
         {
             var items = await GetItemList(BuildUriFromId(id));
             var list = PopulateTreeListViewModel(items, true, new List<TreeListViewModel>());
             foreach (var c in items.Children)
             {
-                var t = await ProcessShareFileItem(c, expand);
+                var t = await ProcessShareFileItem(c, expand, goDeep);
                 list.Contents.Add(t);
             }
             return list;
@@ -74,13 +76,13 @@ namespace FileService
             return allocatorContent;
         }
 
-        private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri, bool expand = false)
+        private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri, bool expand, bool goDeep = false)
         {
             var items = await GetItemList(uri);
             var list = new List<TreeListViewModel>();
             foreach (var c in items.Children)
             {
-                var t = await ProcessShareFileItem(c, expand);
+                var t = await ProcessShareFileItem(c, expand, goDeep);
                 list.Add(t);
             }
             return list;
@@ -88,49 +90,25 @@ namespace FileService
 
         private async Task<Folder> GetRoot()
         {
-            var sfClient = await GetShareFileClient();
+            if (_client == null)
+            {
+                _client = await GetShareFileClient();
+            }
 
-            var itemUri = sfClient.Items.GetAlias(ItemAlias.Home);
-            var folder = (Folder)await sfClient.Items.Get(itemUri).Expand("Children").ExecuteAsync();
-
-            return folder;
-        }
-
-        //private async Task<Folder> Search()
-        //{
-        //    var sfClient = await GetShareFileClient();
-
-        //    var itemUri = sfClient.Items.GetAlias(ItemAlias.Root);
-        //    var folder = (SearchResult) await sfClient.Items.Search("market6").ExecuteAsync();
-
-        //    return folder;
-        //}
-
-        private async Task<Folder> GetUnexpandedItemList(Uri uri)
-        {
-            var sfClient = await GetShareFileClient();
-
-            var folder = (Folder)sfClient.Items.Get(uri)
-               .Execute();
-
-            return folder;
-        }
-
-        private async Task<Folder> GetTopOneUnexpandedItemList(Uri uri)
-        {
-            var sfClient = await GetShareFileClient();
-
-            var folder = (Folder)sfClient.Items.Get(uri)
-               .Execute();
+            var itemUri = _client.Items.GetAlias(ItemAlias.Home);
+            var folder = (Folder)await _client.Items.Get(itemUri).Expand("Children").ExecuteAsync();
 
             return folder;
         }
 
         private async Task<Folder> GetItemList(Uri uri)
         {
-            var sfClient = await GetShareFileClient();
+            if (_client == null)
+            {
+                _client = await GetShareFileClient();
+            }
 
-            var folder = (Folder)sfClient.Items.Get(uri)
+            var folder = (Folder)_client.Items.Get(uri)
                .Expand("Children")
                .Execute();
 
@@ -138,14 +116,14 @@ namespace FileService
         }
 
 
-        private async Task<TreeListViewModel> ProcessShareFileItem(Item c, bool expand = false)
+        private async Task<TreeListViewModel> ProcessShareFileItem(Item c, bool expand, bool goDeep = false)
         {
             var folder = c as Folder;
             var isFolder = folder != null;
             var contents = new List<TreeListViewModel>();
             if (isFolder && expand)
             {
-                contents = await GetFolderListContents(folder.url);
+                contents = await GetFolderListContents(folder.url, goDeep);
             }
             var tr = PopulateTreeListViewModel(c, isFolder, contents);
             return tr;
