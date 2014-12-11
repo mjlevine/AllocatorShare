@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AllocatorShare2.App_Start;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

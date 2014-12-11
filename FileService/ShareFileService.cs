@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 using AllocatorShare2.Core.Models;
 using ShareFile.Api.Client;
@@ -11,10 +11,17 @@ using ShareFile.Api.Client.Extensions;
 using ShareFile.Api.Client.Security.Authentication.OAuth2;
 using ShareFile.Api.Models;
 using AllocatorShare2.Core.Models;
+using AllocatorShare2.Core.Interfaces;
+using File = ShareFile.Api.Models.File;
 
 namespace FileService
 {
-    public class ShareFileService
+    public interface IShareFileService
+    {
+        
+    }
+
+    public class ShareFileService : IFileService
     {
         private string applicationControlPlane = ConfigurationHelper.ApplicationControlPlane;
         private string applicationApiUrl = ConfigurationHelper.ApiUrl;
@@ -24,7 +31,7 @@ namespace FileService
 
 
         private ShareFileClient _client;
-
+        private string _oathToken;
         public async Task<TreeListViewModel> GetRootList()
         {
             var list = new TreeListViewModel();
@@ -76,6 +83,49 @@ namespace FileService
             return allocatorContent;
         }
 
+        public async Task<string> DownloadFile(string id)
+        {
+            if (_client == null)
+            {
+                _client = await GetShareFileClient();
+            }
+            var auth = GetDownloadAuth();
+
+            return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/file.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
+
+        }
+
+        private string GetDownloadUrl(string url)
+        {
+            WebClient client = new WebClient();
+            string downloadUrl = string.Empty;
+            using (Stream data = client.OpenRead(url))
+            {
+                using (StreamReader reader = new StreamReader(data))
+                {
+                    downloadUrl = reader.ReadLine();
+                }
+            }
+
+            return downloadUrl;
+        }
+
+        private string GetDownloadAuth()
+        {
+            string URL = string.Format("https://{0}.sharefile.com/rest/getAuthID.aspx?username={1}&password={2}", subdomain, username, password);
+            WebClient client = new WebClient();
+            string auth = string.Empty;
+            using (Stream data = client.OpenRead(URL))
+            {
+                using (StreamReader reader = new StreamReader(data))
+                {
+                    auth = reader.ReadLine();
+                }
+            }
+            
+            return auth;
+        }
+
         private async Task<List<TreeListViewModel>> GetFolderListContents(Uri uri, bool expand, bool goDeep = false)
         {
             var items = await GetItemList(uri);
@@ -115,6 +165,19 @@ namespace FileService
             return folder;
         }
 
+        private async Task<Item> GetItem(string id)
+        {
+            if (_client == null)
+            {
+                _client = await GetShareFileClient();
+            }
+            var uri = BuildUriFromId(id);
+            var folder = _client.Items.Get(uri)
+               .Execute();
+
+            return folder;
+        }
+
 
         private async Task<TreeListViewModel> ProcessShareFileItem(Item c, bool expand, bool goDeep = false)
         {
@@ -137,6 +200,7 @@ namespace FileService
                 Description = !string.IsNullOrEmpty(c.Description) ? c.Description : c.Name.Replace("_", " "),
                 Type = isFolder ? "folder" : "file",
                 Id = c.Id,
+                Url = !isFolder ? c.GetObjectUri().AbsoluteUri : null,
                 Contents = isFolder ? contents : null
             };
         }
@@ -144,10 +208,13 @@ namespace FileService
         private async Task<ShareFileClient> GetShareFileClient()
         {
             var sfClient = new ShareFileClient("https://secure.sf-api.com/sf/v3/");
+            sfClient.Configuration.ProxyConfiguration = new WebProxy(new Uri("http://127.0.0.1:8888"), false);
             var oauthService = new OAuthService(sfClient, ConfigurationHelper.ClientId, ConfigurationHelper.ClientSecret);
 
             var oauthToken = await oauthService.PasswordGrantAsync(username,
                 password, subdomain, applicationControlPlane);
+
+            _oathToken = oauthToken.AccessToken;
 
             sfClient.AddOAuthCredentials(oauthToken);
             sfClient.BaseUri = oauthToken.GetUri();

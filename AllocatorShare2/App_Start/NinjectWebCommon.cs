@@ -1,3 +1,7 @@
+using System.Web.Http;
+using AllocatorShare2.Core.Interfaces;
+using FileService;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AllocatorShare2.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AllocatorShare2.App_Start.NinjectWebCommon), "Stop")]
 
@@ -46,6 +50,7 @@ namespace AllocatorShare2.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
                 return kernel;
             }
             catch
@@ -61,6 +66,7 @@ namespace AllocatorShare2.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IFileService>().To<ShareFileService>();
         }        
     }
 }

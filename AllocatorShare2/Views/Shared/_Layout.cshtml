@@ -29,23 +29,7 @@
     @Scripts.Render("~/bundles/coreScriptBundle")
     <script type="text/jsx" src="~/bower_components/react-treeview/react-treeview.jsx"></script>
     <script type="text/jsx" src="~/Scripts/Main.js">
-    </script>
-    <script type="text/javascript">
-        $(document).bind("ajaxComplete", function (event, response, settings) {
-            var data = {};
-            try { data = $.parseJSON(response.responseText); } catch (err) { /*Maybe we need a js logger?*/ }
-            if (data.Redirect) {
-                window.location = data.Redirect;
-            }
-            else if (data.mk6Errors) {
-                $.each(data.mk6Errors, function (index, currentError) {
-                    toastr.error(currentError);
-                });
-            }
-        });
-
-    </script>
-   
+    </script>   
     @RenderSection("scripts", required: false)
 </body>
 </html>

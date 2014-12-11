@@ -45,16 +45,22 @@
                 style.display = "none";
             }
 
-            return (
-                <div>
-                    <h5 onClick={this.toggle} className={className}>
+            if (this.props.node.type === "file") {
+                return <h5>
+                    <a href={this.props.node.downloadUrl}>{this.props.node.description}</a>
+                </h5>
+            } else {
+                return (
+                    <div>
+                        <h5 onClick={this.toggle} className={className}>
           {this.props.node.description}
-                    </h5>
-                    <ul style={style}>
+                        </h5>
+                        <ul style={style}>
           {childNodes}
-                    </ul>
-                </div>
-            );
+                        </ul>
+                    </div>
+                );
+            }
         }
 
     });

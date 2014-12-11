@@ -13,6 +13,12 @@ namespace AllocatorShare2.Core.Models
         public string Type { get; set; }
         public string Url { get; set; }
         public string Id { get; set; }
+
+        public string DownloadUrl
+        {
+            get { return "/download/index/" + Id; }
+        }
+
         public List<TreeListViewModel> Contents { get; set; }
     }
 }
