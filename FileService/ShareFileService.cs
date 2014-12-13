@@ -8,7 +8,9 @@ using AllocatorShare2.Core.Models;
 using ShareFile.Api.Client;
 using ShareFile.Api.Client.Enums;
 using ShareFile.Api.Client.Extensions;
+using ShareFile.Api.Client.FileSystem;
 using ShareFile.Api.Client.Security.Authentication.OAuth2;
+using ShareFile.Api.Client.Transfers;
 using ShareFile.Api.Models;
 using AllocatorShare2.Core.Models;
 using AllocatorShare2.Core.Interfaces;
@@ -92,6 +94,30 @@ namespace FileService
             var auth = GetDownloadAuth();
 
             return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/file.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
+
+        }
+
+        public async Task<bool> UploadFile(FileStream file, string parentFolderId)
+        {
+            if (_client == null)
+            {
+                _client = await GetShareFileClient();
+            }
+            var parentFolder = (Folder)await _client.Items.Get().ExecuteAsync();
+            
+            var uploadRequest = new UploadSpecificationRequest
+            {
+                FileName = file.Name,
+                FileSize = file.Length,
+                Parent = parentFolder.url
+            };
+
+            var uploader = _client.GetAsyncFileUploader(uploadRequest,
+                new PlatformFileStream(file, file.Length, file.Name));
+
+            var uploadResponse = await uploader.UploadAsync();
+
+            return uploadResponse.FirstOrDefault() != null;
 
         }
 

@@ -6,23 +6,38 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using AllocatorShare2.Constants;
 using AllocatorShare2.Core.Interfaces;
 using AllocatorShare2.Core.Models;
 using AllocatorShare2.Models;
 using FileService;
+using MK6.Common.Caching.Core;
 
 namespace AllocatorShare2.Controllers.api
 {
-    public class ShareController : ApiController
+    public class ShareController : BaseApiController
     {
-        private IFileService _service;
-        public ShareController(IFileService service)
+        public ShareController(IFileService service, ICacheProvider cacheProvider)
+            : base(service, cacheProvider)
         {
-            _service = service;
+            
         }
+
         [System.Web.Http.HttpGet]
         public async Task<AllocatorTemplateViewModel> Get(string id)
         {
+
+            string cacheKey = String.Format("{0}{1}", SiteSettings.CacheTreeListPrefix, id);
+
+            if (_cacheProvider.Exists(cacheKey))
+            {
+                var cachedList = _cacheProvider.Get<AllocatorTemplateViewModel>(cacheKey);
+                if (cachedList != null)
+                {
+                    return cachedList;
+                }
+            }
+
             var list = await _service.GetFolderListContents(id, false);
             
             //Manager List
@@ -41,6 +56,8 @@ namespace AllocatorShare2.Controllers.api
                 AllocatorList = templatesList,
                 ManagerList = managerListItems
             };
+
+            _cacheProvider.Set(cacheKey, toReturn, SiteSettings.DefaultCacheTimeSpan);
 
             return toReturn;
         }

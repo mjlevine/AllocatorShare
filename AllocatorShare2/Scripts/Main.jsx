@@ -1,10 +1,10 @@
-/** @jsx React.DOM */
+﻿/** @jsx React.DOM */
 
 (function () {
 
     var dataSource = {};
 
-    var TreeNode = React.createClass({displayName: 'TreeNode',
+    var TreeNode = React.createClass({
         xhr: false,
         getInitialState: function () {
             return {
@@ -26,9 +26,9 @@
             var className = "";
             if (this.props.node.contents !== null) {
                 childNodes = this.props.node.contents.map(function (node, index) {
-                    return React.createElement("li", {key: index, className: node.type}, 
-                        React.createElement(TreeNode, {node: node})
-                    );
+                    return <li key={index} className={node.type}>
+                        <TreeNode node={node} />
+                    </li>;
                 });
 
                 className = this.props.node.contents == "folder" ? "togglable" : "";
@@ -45,19 +45,19 @@
             }
 
             if (this.props.node.type === "file") {
-                return React.createElement("h5", null, 
-                    React.createElement("a", {href: this.props.node.downloadUrl}, this.props.node.description)
-                );
+                return <h5>
+                    <a href={this.props.node.downloadUrl}>{this.props.node.description}</a>
+                </h5>;
             } else {
                 return (
-                    React.createElement("div", null, 
-                        React.createElement("h5", {onClick: this.toggle, className: className}, 
-          this.props.node.description
-                        ), 
-                        React.createElement("ul", {style: style}, 
-          childNodes
-                        )
-                    )
+                    <div>
+                        <h5 onClick={this.toggle} className={className}>
+          {this.props.node.description}
+                        </h5>
+                        <ul style={style}>
+          {childNodes}
+                        </ul>
+                    </div>
                 );
             }
         }
@@ -84,7 +84,7 @@
         contentsXhr = $.getJSON("/api/share/" + id, function (data) {
             dataSource = data.allocatorList;
             React.render(
-                React.createElement(TreeNode, {node: dataSource}),
+                <TreeNode node={dataSource} />,
                 document.getElementById('allocatorShareTree')
             );
 

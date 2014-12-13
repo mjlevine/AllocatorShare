@@ -6,24 +6,38 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using AllocatorShare2.Constants;
 using AllocatorShare2.Core.Interfaces;
 using FileService;
+using MK6.Common.Caching.Core;
+using MK6.Common.Caching.Providers;
 
 namespace AllocatorShare2.Controllers.api
 {
-    public class RootListController : ApiController
+    public class RootListController : BaseApiController
     {
-        private IFileService _service;
-        public RootListController(IFileService service)
+       
+        public RootListController(IFileService service, ICacheProvider cacheProvider) : base(service, cacheProvider)
         {
-            _service = service;
         }
 
         [System.Web.Http.HttpGet]
         public async Task<List<SelectListItem>> Get(string id)
         {
-            var list = await _service.GetRootList();
+
+            const string rootListKey = SiteSettings.RootListCacheKey;
+
+            if (_cacheProvider.Exists(rootListKey))
+            {
+                var cachedList = _cacheProvider.Get<List<SelectListItem>>(rootListKey);
+                if (cachedList != null)
+                {
+                    return cachedList;
+                }
+            }
+
             var listItems = new List<SelectListItem>();
+            var list = await _service.GetRootList();
             foreach (var item in list.Contents)
             {
                 listItems.Add(new SelectListItem()
@@ -32,6 +46,7 @@ namespace AllocatorShare2.Controllers.api
                     Value = item.Id
                 });
             }
+            _cacheProvider.Set(rootListKey, listItems, SiteSettings.DefaultCacheTimeSpan);
             return listItems;
         }
     }

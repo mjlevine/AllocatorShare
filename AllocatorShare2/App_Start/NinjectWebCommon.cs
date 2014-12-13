@@ -1,6 +1,8 @@
 using System.Web.Http;
 using AllocatorShare2.Core.Interfaces;
 using FileService;
+using MK6.Common.Caching.Core;
+using MK6.Common.Caching.Providers;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AllocatorShare2.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AllocatorShare2.App_Start.NinjectWebCommon), "Stop")]
@@ -67,6 +69,7 @@ namespace AllocatorShare2.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IFileService>().To<ShareFileService>();
+            kernel.Bind<ICacheProvider>().To<MemoryCacheProvider>();
         }        
     }
 }
