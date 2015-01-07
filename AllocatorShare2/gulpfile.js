@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     stylish = require('jshint-stylish'),
     less = require('gulp-less'),
     sourcemaps = require('gulp-sourcemaps'),
-    react = require('gulp-react');
+    react = require('gulp-react'),
+    bower = require('gulp-bower');
 
 //JS HINT
 gulp.task('lint', function () {
@@ -27,6 +28,10 @@ gulp.task('react', function () {
     return gulp.src('./Scripts/*.jsx')
         .pipe(react())
         .pipe(gulp.dest('./Scripts'));
+});
+
+gulp.task('bower', function () {
+    return bower();
 });
 
 //WATCH
