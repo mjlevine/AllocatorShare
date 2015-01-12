@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>$id</id>
-		<version>$version</version>
-		<authors>$author</authors>
-		<description>$description</description>
+		<id>AllocatorShare2</id>
+		<version>1.0.0</version>
 	</metadata>
 	<files>
 		<file src="bower_components\*.*" target="bower_components" />
