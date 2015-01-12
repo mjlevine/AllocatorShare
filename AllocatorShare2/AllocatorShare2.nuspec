@@ -15,7 +15,7 @@
 		<file src="*.ico" target="" />
 		<file src="*.asax" target="" />
 		<file src="bower_components\**\*.*" target="bower_components" />
-		<file src="Content\*.*" target="Content" />
+		<file src="Content\**\*.*" target="Content" />
 		<file src="Views\**\*.*" target="Views" />
 		<file src="fonts\*.*" target="fonts" />
     <file src="Scripts\*.*" target="Scripts" />
