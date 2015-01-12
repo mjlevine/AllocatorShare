@@ -18,8 +18,7 @@
 		<file src="Content\*.*" target="Content" />
 		<file src="Views\*.*\*.*" target="Views" />
 		<file src="fonts\*.*" target="fonts" />
-		<file src="Scripts\*.*" target="Scripts" />
-
-
+    <file src="Scripts\*.*" target="Scripts" />
+    <file src="bin\**\*.*" target="bin" />
 	</files>
 </package>
