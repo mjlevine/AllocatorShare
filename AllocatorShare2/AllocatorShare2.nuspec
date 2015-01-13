@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>AllocatorShare2</id>
+		<version>1.0.0</version>
+		<title>AllocatorShare2</title>
+		<authors>Market6</authors>
+		<owners>Market6</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>AllocatorShare2</description>
+	</metadata>
+	<files>
+		<file src="Web.config" target="" />
+		<file src="*.js" target="" />
+		<file src="*.ico" target="" />
+		<file src="*.asax" target="" />
+		<file src="bower_components\**\*.*" target="bower_components" />
+		<file src="Content\**\*.*" target="Content" />
+		<file src="Views\**\*.*" target="Views" />
+		<file src="fonts\*.*" target="fonts" />
+    <file src="Scripts\*.*" target="Scripts" />
+    <file src="bin\**\*.*" target="bin" />
+	</files>
+</package>
