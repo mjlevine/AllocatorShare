@@ -1,0 +1,20 @@
+﻿<div class="well">
+    <p class="bg-warning lead">Use the CHOOSE FILE button to select a file to Upload then press UPLOAD </p>
+    <div class="well">This Page will NOT change until the upload is complete ... Please be Patient</div>
+    <div>
+        Target Folder: <label id="targetFolderLabel"></label>
+
+        <form id="fileUploadForm" name="fileUploadForm">
+            <div class="form-group">
+                <input type="file" name="fileUploadField" id="fileUploadField" />
+                <input type="hidden" value="test" name="uploadRootFolderId" id="uploadRootFolderId" />
+            </div>
+            <div class="form-group">
+                <button id="uploadSubmit" class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i> Upload</button>
+            </div>
+        </form>
+        <div class="responseMessage"></div>
+        <hr />
+        <button id="imbtnSelect1"><i class="glyphicon glyphicon-arrow-left"></i> Change Manager</button>
+    </div>
+</div>

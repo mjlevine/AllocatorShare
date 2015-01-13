@@ -7,43 +7,49 @@
             <div id="allocatorShareTree" style="margin-bottom: 10px;"></div>
         </div>
         <div class="col-xs-8">
-            <div class="well">
-                <p class="bg-warning lead">Please select a Major Department, click Apply.</p>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="ddlDept" class="col-sm-3 control-label">Major Department</label>
-                        <div class="col-sm-6">
-                            <select name="ddlDept" id="ddlDept" class="form-control"></select>
+            <div id="selectionContainer">
+                <div class="well">
+                    <p class="bg-warning lead">Please select a Major Department, click Apply.</p>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="ddlDept" class="col-sm-3 control-label">Major Department</label>
+                            <div class="col-sm-6">
+                                <select name="ddlDept" id="ddlDept" class="form-control"></select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3" id="DepartmentLoading"></div>
-                        <div class=" col-sm-9">
-                            <input type="button" name="ApplyDepartment" id="ApplyDepartment" valign="bottom" value="Apply" class="btn btn-default btn-sm">
+                        <div class="form-group">
+                            <div class="col-sm-3" id="DepartmentLoading"></div>
+                            <div class=" col-sm-9">
+                                <input type="button" name="ApplyDepartment" id="ApplyDepartment" valign="bottom" value="Apply" class="btn btn-default btn-sm">
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="well">
+                    <p class="bg-warning lead">Pick a Category Manager and Press Continue.</p>
+                    <form class="form-horizontal" role="form" action="upload">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                Category Manager:
+                            </label>
+                            <div class="col-sm-6">
+                                <select name="CategoryManagerList" id="CategoryManagerList" class="form-control"></select>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3" id="ManagerLoading"></div>
+                            <div class=" col-sm-9">
+                                <input type="button" name="imbtnUpload1" id="imbtnUpload1" value="Continue" class="btn btn-primary" style="width:136px;">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="well">
-                <p class="bg-warning lead">Pick a Category Manager and Press Continue.</p>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">
-                            Category Manager:
-                        </label>
-                        <div class="col-sm-6">
-                            <select name="CategoryManagerList" id="CategoryManagerList" class="form-control"></select>
-                        </div>
-
-
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3" id="ManagerLoading"></div>
-                        <div class=" col-sm-9">
-                            <input type="button" name="imbtnUpload1" id="imbtnUpload1" value="Continue" class="btn btn-primary" style="width:136px;">
-                        </div>
-                    </div>
-                </form>
+            <div id="uploadContainer" style="display:none;">
+                @Html.Partial("_Upload")
+                
             </div>
 
         </div>

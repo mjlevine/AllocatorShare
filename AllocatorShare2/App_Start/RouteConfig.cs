@@ -20,6 +20,12 @@ namespace AllocatorShare2
             );
 
             routes.MapRoute(
+                name: "Upload",
+                url: "upload/{id}",
+                defaults: new { controller = "Home", action = "Upload", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

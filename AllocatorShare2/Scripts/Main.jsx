@@ -116,8 +116,51 @@
     $("#ApplyDepartment").on("click", function(){
         var value = $("#ddlDept").val();
         getContents(value);
-        //getManagers(value);
     });
 
 
+    $("#imbtnUpload1").on("click", function(){
+       $("#selectionContainer").hide();
+        $("#uploadContainer").show();
+        $("#targetFolderLabel").html($("#CategoryManagerList option:selected").text())
+    });
+
+    $("#imbtnSelect1").on("click", function(){
+        $('#fileUploadField').val('');
+        $(".responseMessage").html("");
+
+        $("#selectionContainer").show();
+        $("#uploadContainer").hide();
+    });
+
+    $("#uploadSubmit").on("click", function() {
+        var $button = $(this),
+            value = $("#CategoryManagerList").val(),
+            formData,
+            $responseMessage = $(".responseMessage");
+
+        $("#uploadRootFolderId").val(value);
+        $button.attr("disabled","disabled");
+        $responseMessage.html("");
+
+        formData = new FormData(document.getElementById("fileUploadForm"));
+        $.ajax({
+            url: '/api/upload/' + value,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (returndata) {
+                $responseMessage.html("File Uploaded - You may upload another file.");
+                $button.removeAttr("disabled")
+                $('#fileUploadField').val('');
+            },
+            error: function(err) {
+                $responseMessage.html($("<div>").addClass("error").text(err.responseJSON.message));
+                $button.removeAttr("disabled")
+            }
+        });
+
+        return false;
+    });
 })();

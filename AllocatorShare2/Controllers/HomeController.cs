@@ -10,6 +10,11 @@ namespace AllocatorShare2.Controllers
             return View();
         }
 
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
        
 
         public ActionResult Auth()
