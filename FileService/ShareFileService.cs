@@ -11,6 +11,7 @@ using ShareFile.Api.Client.Extensions;
 using ShareFile.Api.Client.FileSystem;
 using ShareFile.Api.Client.Security.Authentication.OAuth2;
 using ShareFile.Api.Client.Transfers;
+using ShareFile.Api.Client.Transfers.Uploaders;
 using ShareFile.Api.Models;
 using AllocatorShare2.Core.Models;
 using AllocatorShare2.Core.Interfaces;
@@ -97,19 +98,21 @@ namespace FileService
 
         }
 
-        public async Task<bool> UploadFile(FileStream file, string parentFolderId)
+        public async Task<bool> UploadFile(FileStream file, string parentFolderId, string fileName)
         {
             if (_client == null)
             {
                 _client = await GetShareFileClient();
             }
-            var parentFolder = (Folder)await _client.Items.Get().ExecuteAsync();
-            
+            var parentFolder = (Folder)await _client.Items.Get(BuildUriFromId(parentFolderId), false).ExecuteAsync();
+
             var uploadRequest = new UploadSpecificationRequest
             {
-                FileName = file.Name,
+                FileName = fileName,
                 FileSize = file.Length,
-                Parent = parentFolder.url
+                Details = string.Empty,
+                Parent = parentFolder.url,
+                Overwrite = true
             };
 
             var uploader = _client.GetAsyncFileUploader(uploadRequest,
@@ -234,7 +237,7 @@ namespace FileService
         private async Task<ShareFileClient> GetShareFileClient()
         {
             var sfClient = new ShareFileClient("https://secure.sf-api.com/sf/v3/");
-            sfClient.Configuration.ProxyConfiguration = new WebProxy(new Uri("http://127.0.0.1:8888"), false);
+            //sfClient.Configuration.ProxyConfiguration = new WebProxy(new Uri("http://127.0.0.1:8888"), false);
             var oauthService = new OAuthService(sfClient, ConfigurationHelper.ClientId, ConfigurationHelper.ClientSecret);
 
             var oauthToken = await oauthService.PasswordGrantAsync(username,
