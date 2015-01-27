@@ -1,5 +1,6 @@
 ﻿@mk6-orange: #D88F1A;
-@blue: #476396;
+@blue: #006098;
+@white: #fff;
 .loading {
     background: url("/Content/images/ajax-loader.gif") no-repeat center 10%;
     height: 50px;
@@ -7,20 +8,29 @@
 }
 
 header {
+    background: @blue;
     .navbar-header {
         width:80%;
-        min-height: 50px;
+        vertical-align: middle;
+    }
+    .navbar-brand {
+        height:30px;
     }
     h1{
-        margin-left:20px;
-        color: @mk6-orange;
-        display:inline;
-        padding: 5px 20px;
+        margin: 15px 20px;
+        color: @white;
+        font-size:1.3em;
+        text-transform: uppercase;
     }
     
     a {
         display:block;
         padding: 10px;
+        color: @white;
+
+        &:hover {
+            color: @white;
+        }
     }
 }
 
