@@ -113,7 +113,7 @@
         //getManagers(data[0].value);
     });
 
-    $("#ApplyDepartment").on("click", function(){
+    $("#ddlDept").on("change", function(){
         var value = $("#ddlDept").val();
         getContents(value);
     });
