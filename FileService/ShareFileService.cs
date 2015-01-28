@@ -69,6 +69,7 @@ namespace FileService
                 var t = await ProcessShareFileItem(c, expand, goDeep);
                 list.Contents.Add(t);
             }
+            list.Contents = list.Contents.OrderByDescending(x => x.Description).ToList();
             return list;
         }
 
@@ -216,6 +217,7 @@ namespace FileService
             if (isFolder && expand)
             {
                 contents = await GetFolderListContents(folder.url, goDeep);
+                contents = contents.OrderByDescending(x => x.Description).ToList();
             }
             var tr = PopulateTreeListViewModel(c, isFolder, contents);
             return tr;

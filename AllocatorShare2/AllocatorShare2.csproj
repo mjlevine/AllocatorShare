@@ -254,7 +254,6 @@
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <None Include="Scripts\Main.jsx" />
-    <Content Include="Scripts\Main.js" />
     <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -299,6 +298,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Home\_Upload.cshtml" />
+    <Content Include="Web.Dev.config" />
+    <Content Include="Web.Test.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

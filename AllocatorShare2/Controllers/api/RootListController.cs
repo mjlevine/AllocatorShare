@@ -38,7 +38,7 @@ namespace AllocatorShare2.Controllers.api
 
             var listItems = new List<SelectListItem>();
             var list = await _service.GetRootList();
-            foreach (var item in list.Contents)
+            foreach (var item in list.Contents.OrderBy(x => x.Description))
             {
                 listItems.Add(new SelectListItem()
                 {
