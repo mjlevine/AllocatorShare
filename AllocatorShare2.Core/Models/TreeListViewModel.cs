@@ -20,5 +20,6 @@ namespace AllocatorShare2.Core.Models
         }
 
         public List<TreeListViewModel> Contents { get; set; }
+
     }
 }
