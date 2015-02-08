@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using FileService;
 
@@ -15,6 +17,19 @@ namespace AllocatorShare2.Controllers
             return View();
         }
 
+        public RedirectResult BackToDashboard()
+        {
+            var redirectTo = string.Empty;
+            if (Request.Url == null || Request.Url.Host == ("localhost")) return Redirect(redirectTo);
+
+            var portalHost = "";
+            var reportingPortalAlias = "";
+            var scheme = Uri.UriSchemeHttps;
+            reportingPortalAlias = "reportingportal";
+            portalHost = Regex.Replace(Request.Url.Host, ("^[^.]+"), reportingPortalAlias, RegexOptions.IgnoreCase);
+            redirectTo = scheme + "://" + portalHost;
+            return Redirect(redirectTo);
+        }
        
 
         public ActionResult Auth()
