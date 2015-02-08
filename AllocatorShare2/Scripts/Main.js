@@ -121,6 +121,7 @@
 
     $("#imbtnUpload1").on("click", function(){
        $("#selectionContainer").hide();
+	   $("#uploadSubmit").removeAttr("disabled")
         $("#uploadContainer").show();
         $("#targetFolderLabel").html($("#CategoryManagerList option:selected").text())
     });
