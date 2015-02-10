@@ -32,40 +32,16 @@ namespace AllocatorShare2.Controllers
                     throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
                 }
 
-                var root = HttpContext.Current.Server.MapPath("~/App_Data");
-                var provider = new MultipartFormDataStreamProvider(root); 
+                Request.Content.LoadIntoBufferAsync().Wait();
 
-                // Read the form data and return an async task. 
-                await Request.Content.ReadAsMultipartAsync(provider);
-                
-                // This illustrates how to get the file names for uploaded files. 
-                foreach (var fileData in provider.FileData)
+                var provider = new MultipartMemoryStreamProvider();
+
+                provider = Request.Content.ReadAsMultipartAsync(provider).Result;
+
+                foreach (var item in provider.Contents.Where(x => x.Headers.ContentDisposition.Name != "\"uploadRootFolderId\""))
                 {
-                    string fileName = ""; 
-                    fileName = fileData.Headers.ContentDisposition.FileName; 
-                    if (fileName.StartsWith("\"") && fileName.EndsWith("\"")) 
-                    { 
-                      fileName = fileName.Trim('"'); 
-                    } 
-                    if (fileName.Contains(@"/") || fileName.Contains(@"\")) 
-                    { 
-                      fileName = Path.GetFileName(fileName); 
-                    }
-
-                    var renamedFilePath = Path.Combine(root, fileName);
-                    
-                    if(File.Exists(renamedFilePath))
-                    {
-                        File.Delete(renamedFilePath);
-                    }
-                    File.Move(fileData.LocalFileName,
-                      renamedFilePath);
-
-                    using (var filestream = File.OpenRead(renamedFilePath))
-                    {
-                        await _service.UploadFile(filestream, id, fileName);
-                    }
-                    File.Delete(fileName);
+                    var stream = item.ReadAsStreamAsync().Result;
+                    await _service.UploadFile(stream, id, item.Headers.ContentDisposition.FileName);
                 }
 
                 return new ResponseMessageResult(Request.CreateErrorResponse(HttpStatusCode.OK, "Success"));

@@ -95,11 +95,11 @@ namespace FileService
             }
             var auth = GetDownloadAuth();
 
-            return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/file.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
+            return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/stream.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
 
         }
 
-        public async Task<bool> UploadFile(FileStream file, string parentFolderId, string fileName)
+        public async Task<bool> UploadFile(Stream stream, string parentFolderId, string fileName)
         {
             if (_client == null)
             {
@@ -110,14 +110,14 @@ namespace FileService
             var uploadRequest = new UploadSpecificationRequest
             {
                 FileName = fileName,
-                FileSize = file.Length,
+                FileSize = stream.Length,
                 Details = string.Empty,
                 Parent = parentFolder.url,
                 Overwrite = true
             };
 
             var uploader = _client.GetAsyncFileUploader(uploadRequest,
-                new PlatformFileStream(file, file.Length, file.Name));
+                new PlatformFileStream(stream, stream.Length, fileName));
 
             var uploadResponse = await uploader.UploadAsync();
 
@@ -229,7 +229,7 @@ namespace FileService
             {
                 Name = c.Name,
                 Description = !string.IsNullOrEmpty(c.Description) ? c.Description : c.Name.Replace("_", " "),
-                Type = isFolder ? "folder" : "file",
+                Type = isFolder ? "folder" : "stream",
                 Id = c.Id,
                 Url = !isFolder ? c.GetObjectUri().AbsoluteUri : null,
                 Contents = isFolder ? contents : null

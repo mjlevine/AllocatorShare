@@ -16,6 +16,6 @@ namespace AllocatorShare2.Core.Interfaces
         List<TreeListViewModel> GetManagerListItems(List<TreeListViewModel> contents);
         TreeListViewModel GetAllocatorTemplate(List<TreeListViewModel> contents);
         Task<string> DownloadFile(string id);
-        Task<bool> UploadFile(FileStream file, string parentFolderId, string fileName);
+        Task<bool> UploadFile(Stream stream, string parentFolderId, string fileName);
     }
 }
