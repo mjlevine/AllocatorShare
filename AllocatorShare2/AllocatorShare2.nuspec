@@ -10,7 +10,8 @@
 		<description>AllocatorShare2</description>
 	</metadata>
 	<files>
-		<file src="Web.config" target="" />
+    <file src="Web.config" target="" />
+    <file src="Web.*.config" target="" />
 		<file src="*.js" target="" />
 		<file src="*.ico" target="" />
 		<file src="*.asax" target="" />
