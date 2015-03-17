@@ -94,9 +94,7 @@ namespace FileService
                 _client = await GetShareFileClient();
             }
             var auth = GetDownloadAuth();
-
-            return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/stream.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
-
+            return GetDownloadUrl(string.Format("https://{0}.sharefile.com/rest/file.aspx?op=download&authid={1}&id={2}", subdomain, auth, id));
         }
 
         public async Task<bool> UploadFile(Stream stream, string parentFolderId, string fileName)

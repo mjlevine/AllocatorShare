@@ -43,8 +43,7 @@
             if (!this.state.visible) {
                 style.display = "none";
             }
-
-            if (this.props.node.type === "file") {
+            if (this.props.node.type === "stream") {
                 return <h5>
                     <a href={this.props.node.downloadUrl}>{this.props.node.description}</a>
                 </h5>;

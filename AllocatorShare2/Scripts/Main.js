@@ -4,7 +4,7 @@
 
     var dataSource = {};
 
-    var TreeNode = React.createClass({displayName: 'TreeNode',
+    var TreeNode = React.createClass({displayName: "TreeNode",
         xhr: false,
         getInitialState: function () {
             return {
@@ -43,8 +43,7 @@
             if (!this.state.visible) {
                 style.display = "none";
             }
-
-            if (this.props.node.type === "file") {
+            if (this.props.node.type === "stream") {
                 return React.createElement("h5", null, 
                     React.createElement("a", {href: this.props.node.downloadUrl}, this.props.node.description)
                 );
