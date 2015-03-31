@@ -42,8 +42,40 @@ namespace FileService
             var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true, false);
             
             list.Name = folders.Name;
-            list.Contents = folders.Contents.First().Contents;
+            list.Contents = folders.Contents.First().Contents.Where(m => !m.Name.Equals("templates", StringComparison.CurrentCultureIgnoreCase)).ToList();
             
+            return list;
+        }
+
+        public async Task<TreeListViewModel> GetTemplateFolderList(string id)
+        {
+            var list = new TreeListViewModel();
+
+            //Pull Root Folders
+            var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true, false);
+            
+            //Get Template Folder Root
+            var templateFolder = folders.Contents.First().Contents.FirstOrDefault(m => m.Name.Equals("templates", StringComparison.CurrentCultureIgnoreCase));
+            if (templateFolder == null)
+                return list;
+
+            //Get Name Of Section We're After
+            var sectionNameItem = folders.Contents.First().Contents.FirstOrDefault(m => m.Id.Equals(id));
+            if (sectionNameItem == null)
+                return list;
+            var sectionName = sectionNameItem.Name;
+
+            //Get Contents of Template Folder
+            var folderList = await GetFolderListContents(templateFolder.Id, true, false);
+            var specificTemplateFolder = folderList.Contents.FirstOrDefault(m => m.Name.Equals(string.Format("{0}_templates", sectionName), StringComparison.CurrentCultureIgnoreCase));
+            if (specificTemplateFolder == null)
+                return list;
+
+            //Get Name Of Template
+            var templateFolderList = await GetFolderListContents(specificTemplateFolder.Id, true, true);
+            list.Name = sectionNameItem.Description;
+            list.Contents = templateFolderList.Contents;
+
             return list;
         }
         

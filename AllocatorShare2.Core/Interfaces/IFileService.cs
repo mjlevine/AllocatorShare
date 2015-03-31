@@ -11,6 +11,7 @@ namespace AllocatorShare2.Core.Interfaces
     public interface IFileService
     {
         Task<TreeListViewModel> GetRootList();
+        Task<TreeListViewModel> GetTemplateFolderList(string name);
         Task<TreeListViewModel> GetFolderList();
         Task<TreeListViewModel> GetFolderListContents(string id, bool expand, bool goDeep = false);
         List<TreeListViewModel> GetManagerListItems(List<TreeListViewModel> contents);

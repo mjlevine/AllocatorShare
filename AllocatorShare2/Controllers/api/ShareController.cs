@@ -48,8 +48,7 @@ namespace AllocatorShare2.Controllers.api
             }).ToList();
 
             //Tree List
-            var template = list.Contents.FirstOrDefault(m => m.Name == "Allocator_Templates");
-            var templatesList = await _service.GetFolderListContents(template.Id, true, true);
+            var templatesList = await _service.GetTemplateFolderList(id);
             templatesList.Description = string.Format("EZ Allocator - {0}", list.Description);
             var toReturn = new AllocatorTemplateViewModel()
             {
