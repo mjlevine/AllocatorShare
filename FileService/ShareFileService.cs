@@ -16,6 +16,7 @@ using ShareFile.Api.Models;
 using AllocatorShare2.Core.Models;
 using AllocatorShare2.Core.Interfaces;
 using File = ShareFile.Api.Models.File;
+using System.Web;
 
 namespace FileService
 {
@@ -172,7 +173,7 @@ namespace FileService
 
         private string GetDownloadAuth()
         {
-            string URL = string.Format("https://{0}.sharefile.com/rest/getAuthID.aspx?username={1}&password={2}", subdomain, username, password);
+            string URL = string.Format("https://{0}.sharefile.com/rest/getAuthID.aspx?username={1}&password={2}", subdomain, username, HttpUtility.UrlEncode(password));
             WebClient client = new WebClient();
             string auth = string.Empty;
             using (Stream data = client.OpenRead(URL))
