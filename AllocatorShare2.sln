@@ -12,21 +12,35 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Dev|Any CPU = Dev|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Dev|Any CPU.Build.0 = Dev|Any CPU
 		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{F9B9709A-40AC-442B-91BF-5E5FA9C450BA}.Test|Any CPU.Build.0 = Test|Any CPU
 		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Dev|Any CPU.Build.0 = Dev|Any CPU
 		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{C5AF6431-F958-42D5-9348-A900098EC9F2}.Test|Any CPU.Build.0 = Test|Any CPU
 		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Dev|Any CPU.Build.0 = Dev|Any CPU
 		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{7745B53E-7172-4BCB-957D-5EA8091090F6}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
