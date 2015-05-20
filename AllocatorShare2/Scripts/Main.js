@@ -134,10 +134,26 @@
     });
 
     $("#uploadSubmit").on("click", function() {
-        var $button = $(this),
+		var $button = $(this),
             value = $("#CategoryManagerList").val(),
             formData,
             $responseMessage = $(".responseMessage");
+
+		var displayError = function(errorMessage) {
+            $responseMessage.html($("<div>").addClass("error").text(errorMessage));
+            $button.removeAttr("disabled")
+		}
+
+		var validated = function() {
+		    if ($('#fileUploadField').val() == "") {
+				displayError('You have not specified a file');
+				return false;
+			}
+
+			return true;
+		}
+        
+		if (!validated()) return false;
 
         $("#uploadRootFolderId").val(value);
         $button.attr("disabled","disabled");
@@ -155,10 +171,9 @@
                 $button.removeAttr("disabled")
                 $('#fileUploadField').val('');
             },
-            error: function(err) {
-                $responseMessage.html($("<div>").addClass("error").text(err.responseJSON.message));
-                $button.removeAttr("disabled")
-            }
+            error: function(err) { 
+				displayError(err.responseJSON.message);
+			}
         });
 
         return false;
