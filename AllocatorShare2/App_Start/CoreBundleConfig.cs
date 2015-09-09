@@ -27,6 +27,7 @@ namespace AllocatorShare2
                 "~/bower_components/react/react.min.js",
                 "~/bower_components/underscore/underscore.js",
                 "~/bower_components/moment/min/moment.min.js",
+                "~/bower_components/console-polyfill/index.js",
                 "~/Scripts/Highcharts-4.0.1/js/highcharts.js",
 				"~/Scripts/Highcharts-4.0.1/js/adapters/standalone-framework.js",
                 "~/Scripts/mk6/eventService.js",

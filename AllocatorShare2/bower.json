@@ -16,6 +16,7 @@
     "jquery": "~1.10.0",
     "toastr": "~2.1.0",
     "underscore": "~1.7.0",
-    "moment": "~2.8.4"
+    "moment": "~2.8.4",
+    "console-polyfill":  "~0.2.1"
   }
 }
