@@ -22,14 +22,14 @@ namespace AllocatorShare2
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/coreScriptBundle").Include(
-				"~/bower_components/jquery/jquery.min.js",
+                "~/bower_components/console-polyfill/index.js",
+                "~/bower_components/es5-shim/es5-shim.js",
+                "~/bower_components/es5-shim/es5-sham.js",
+                "~/bower_components/jquery/jquery.min.js",
                 "~/bower_components/react/JSXTransformer.js",
                 "~/bower_components/react/react.min.js",
                 "~/bower_components/underscore/underscore.js",
                 "~/bower_components/moment/min/moment.min.js",
-                "~/bower_components/console-polyfill/index.js",
-                "~/bower_components/es5-shim/es5-shim.js",
-                "~/bower_components/es5-shim/es5-sham.js",
                 "~/Scripts/Highcharts-4.0.1/js/highcharts.js",
 				"~/Scripts/Highcharts-4.0.1/js/adapters/standalone-framework.js",
                 "~/Scripts/mk6/eventService.js",
