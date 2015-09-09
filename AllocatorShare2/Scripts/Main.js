@@ -77,8 +77,6 @@
         }
         setLoading(document.getElementById('ManagerLoading'));
         setLoading(document.getElementById('allocatorShareTree'));
-        var managerSelectList = document.getElementById('CategoryManagerList');
-        managerSelectList.innerHTML = '';
 
         contentsXhr = $.getJSON("/api/share/" + id, function (data) {
             dataSource = data.allocatorList;
@@ -92,7 +90,7 @@
             _.each(data.managerList, function(item){
                 listItems+= "<option value='" + item.value + "'>" + item.text + "</option>";
             });
-            managerSelectList.innerHTML = listItems;
+			$("#CategoryManagerList").html(listItems);
             document.getElementById('ManagerLoading').innerHTML = '';
 
         });
