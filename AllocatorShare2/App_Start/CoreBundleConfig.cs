@@ -28,6 +28,7 @@ namespace AllocatorShare2
                 "~/bower_components/jquery/jquery.min.js",
                 "~/bower_components/react/JSXTransformer.js",
                 "~/bower_components/react/react.min.js",
+                "~/bower_components/jquery-form/jquery.form.js",
                 "~/bower_components/underscore/underscore.js",
                 "~/bower_components/moment/min/moment.min.js",
                 "~/Scripts/Highcharts-4.0.1/js/highcharts.js",

@@ -18,6 +18,7 @@
     "underscore": "~1.7.0",
     "moment": "~2.8.4",
     "console-polyfill": "~0.2.1",
-    "es5-shim":  "~4.1.13"
+    "es5-shim": "~4.1.13",
+    "jquery-form":  "~3.46.0"
   }
 }

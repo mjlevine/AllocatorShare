@@ -157,22 +157,20 @@
         $button.attr("disabled","disabled");
         $responseMessage.html("");
 
-        formData = new FormData(document.getElementById("fileUploadForm"));
-        $.ajax({
+		$("#fileUploadForm").ajaxForm({
+			success: function (returndata) {
+				$responseMessage.html("File Uploaded - You may upload another file.");
+				$button.removeAttr("disabled");
+				$('#fileUploadField').val('');
+			},
             url: '/api/upload/' + value,
             type: 'POST',
-            data: formData,
             processData: false,
             contentType: false,
-            success: function (returndata) {
-                $responseMessage.html("File Uploaded - You may upload another file.");
-                $button.removeAttr("disabled")
-                $('#fileUploadField').val('');
-            },
             error: function(err) { 
 				displayError(err.responseJSON.message);
 			}
-        });
+        }).submit();
 
         return false;
     });

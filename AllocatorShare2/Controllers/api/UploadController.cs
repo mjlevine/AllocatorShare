@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -44,7 +45,8 @@ namespace AllocatorShare2.Controllers
                     await _service.UploadFile(stream, id, item.Headers.ContentDisposition.FileName);
                 }
 
-                return new ResponseMessageResult(Request.CreateErrorResponse(HttpStatusCode.OK, "Success"));
+                var response = Request.CreateResponse(HttpStatusCode.OK, "Success", "text/html");
+                return new ResponseMessageResult(response);
             }
             catch (Exception e)
             {
