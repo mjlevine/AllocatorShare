@@ -42,15 +42,24 @@ namespace AllocatorShare2.Controllers
                 foreach (var item in provider.Contents.Where(x => x.Headers.ContentDisposition.Name != "\"uploadRootFolderId\""))
                 {
                     var stream = item.ReadAsStreamAsync().Result;
-                    await _service.UploadFile(stream, id, item.Headers.ContentDisposition.FileName);
+                    
+                    var fileName = new FileInfo(item.Headers.ContentDisposition.FileName.Replace("\"", "")).Name;  //provides legacy browser compatibility
+                    await _service.UploadFile(stream, id, fileName);
                 }
 
-                var response = Request.CreateResponse(HttpStatusCode.OK, "Success", "text/html");
-                return new ResponseMessageResult(response);
+                var resp = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent("Success", System.Text.Encoding.UTF8, "text/html")
+                };
+                return new ResponseMessageResult(resp);
             }
             catch (Exception e)
             {
-                return new ResponseMessageResult(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message));
+                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(e.Message, System.Text.Encoding.UTF8, "text/html")
+                };
+                return new ResponseMessageResult(resp);
             } 
 
         }

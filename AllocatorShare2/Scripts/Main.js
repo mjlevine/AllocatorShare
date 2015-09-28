@@ -168,7 +168,7 @@
             processData: false,
             contentType: false,
             error: function(err) { 
-				displayError(err.responseJSON.message);
+				displayError(err.responseText);
 			}
         }).submit();
 
