@@ -81,9 +81,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MK6.Common.Caching.Core.1.0.15006.2\lib\net451\MK6.Common.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="MK6.Kroger.Common.Identity, Version=0.2.14232.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MK6.Kroger.Common.Identity.0.2.14232.02\lib\net45\MK6.Kroger.Common.Identity.dll</HintPath>
+    <Reference Include="MK6.Kroger.Common.Identity, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MK6.Kroger.Common.Identity.1.0.13\lib\net45\MK6.Kroger.Common.Identity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MsieJavaScriptEngine">
       <HintPath>..\packages\MsieJavaScriptEngine.1.5.0\lib\net40\MsieJavaScriptEngine.dll</HintPath>
