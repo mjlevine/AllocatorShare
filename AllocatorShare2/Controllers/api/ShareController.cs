@@ -56,7 +56,7 @@ namespace AllocatorShare2.Controllers.api
                 ManagerList = managerListItems
             };
 
-            _cacheProvider.Set(cacheKey, toReturn, SiteSettings.DefaultCacheTimeSpan);
+            _cacheProvider.Set(cacheKey, toReturn, SiteSettings.TemplateCacheTimeSpan);
 
             return toReturn;
         }
