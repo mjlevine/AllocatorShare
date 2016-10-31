@@ -43,7 +43,7 @@ namespace FileService
             var folders = await GetFolderListContents(ItemAlias.Root.ToString(), true, false);
             
             list.Name = folders.Name;
-            list.Contents = folders.Contents.First().Contents.Where(m => !m.Name.Equals("templates", StringComparison.CurrentCultureIgnoreCase)).ToList();
+            list.Contents = folders.Contents.First().FilterRootList().Contents;
             
             return list;
         }
