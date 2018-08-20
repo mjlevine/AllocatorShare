@@ -1,0 +1,13 @@
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\FileService.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\FileService.pdb
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\AllocatorShare2.Core.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\Newtonsoft.Json.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\ShareFile.Api.Client.Core.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\ShareFile.Api.Client.Net45.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\AllocatorShare2.Core.pdb
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\Newtonsoft.Json.xml
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\ShareFile.Api.Client.Core.xml
+C:\Code\kroger.allocatorshare2.0\FileService\bin\ProdTemp\ShareFile.Api.Client.Net45.xml
+C:\Code\kroger.allocatorshare2.0\FileService\obj\ProdTemp\FileService.csprojResolveAssemblyReference.cache
+C:\Code\kroger.allocatorshare2.0\FileService\obj\ProdTemp\FileService.dll
+C:\Code\kroger.allocatorshare2.0\FileService\obj\ProdTemp\FileService.pdb

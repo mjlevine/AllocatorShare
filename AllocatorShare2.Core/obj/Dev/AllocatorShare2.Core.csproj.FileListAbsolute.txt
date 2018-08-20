@@ -1,0 +1,5 @@
+C:\Code\kroger.allocatorshare2.0\AllocatorShare2.Core\bin\Dev\AllocatorShare2.Core.dll
+C:\Code\kroger.allocatorshare2.0\AllocatorShare2.Core\bin\Dev\AllocatorShare2.Core.pdb
+C:\Code\kroger.allocatorshare2.0\AllocatorShare2.Core\obj\Dev\AllocatorShare2.Core.csprojResolveAssemblyReference.cache
+C:\Code\kroger.allocatorshare2.0\AllocatorShare2.Core\obj\Dev\AllocatorShare2.Core.dll
+C:\Code\kroger.allocatorshare2.0\AllocatorShare2.Core\obj\Dev\AllocatorShare2.Core.pdb

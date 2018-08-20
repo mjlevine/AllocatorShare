@@ -1,0 +1,13 @@
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\FileService.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\FileService.pdb
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\AllocatorShare2.Core.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\Newtonsoft.Json.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\ShareFile.Api.Client.Core.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\ShareFile.Api.Client.Net45.dll
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\AllocatorShare2.Core.pdb
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\Newtonsoft.Json.xml
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\ShareFile.Api.Client.Core.xml
+C:\Code\kroger.allocatorshare2.0\FileService\bin\Debug\ShareFile.Api.Client.Net45.xml
+C:\Code\kroger.allocatorshare2.0\FileService\obj\Debug\FileService.csprojResolveAssemblyReference.cache
+C:\Code\kroger.allocatorshare2.0\FileService\obj\Debug\FileService.dll
+C:\Code\kroger.allocatorshare2.0\FileService\obj\Debug\FileService.pdb
